@@ -1,0 +1,212 @@
+{
+  "main": {
+    "id": "63d45a49275687ed",
+    "type": "split",
+    "children": [
+      {
+        "id": "406f115af0e31589",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "435a155ba2b8f2c6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          },
+          {
+            "id": "056ef386782d261c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "README"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "67fdda0c4959a8d8",
+    "type": "split",
+    "children": [
+      {
+        "id": "8a544b6b6974aaab",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2350191f75d50f4b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "59ba5ad3b80203ef",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
+          {
+            "id": "93200e75396b814a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "9a41f7ac83da2961",
+    "type": "split",
+    "children": [
+      {
+        "id": "199dbdc60d75c1df",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d47ff92a41a636bd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "README 的反向链接列表"
+            }
+          },
+          {
+            "id": "839a9053cf3a5ad2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "README 的出链列表"
+            }
+          },
+          {
+            "id": "c25aa6084943fb39",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "2c85fad6d7fbb27d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "README 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "056ef386782d261c",
+  "lastOpenFiles": [
+    "hello-rust/target/doc/textwrap/wrap/fn.wrap.html",
+    "hello-rust/target/doc/textwrap/wrap",
+    "hello-rust/target/doc/textwrap/columns/fn.wrap_columns.html",
+    "hello-rust/target/doc/textwrap/columns",
+    "设置代理.md",
+    "hello-rust/target/doc/hello_rust/sidebar-items.js",
+    "hello-rust/target/doc/hello_rust/index.html",
+    "hello-rust/target/doc/hello_rust/fn.main.html",
+    "hello-rust/target/doc/hello_rust/all.html",
+    "hello-rust/target/doc/hello_rust",
+    "hello-rust/target/doc/search.desc/hello_rust/hello_rust-desc-0-.js",
+    "hello-rust/target/doc/search.desc/hello_rust",
+    "hello-rust/target/doc/static.files/SourceSerif4-LICENSE-a2cfd9d5.md",
+    "hello-rust/target/doc/static.files/rust-logo-9a9549ea.svg",
+    "hello-rust/target/doc/static.files/favicon-32x32-6580c154.png",
+    "hello-rust/target/doc/static.files/favicon-044be391.svg",
+    "guessing_game/target/doc/static.files/SourceSerif4-LICENSE-a2cfd9d5.md",
+    "guessing_game/target/doc/static.files/favicon-32x32-6580c154.png",
+    "guessing_game/target/doc/static.files/favicon-044be391.svg",
+    "guessing_game/target/doc/static.files/rust-logo-9a9549ea.svg",
+    "README.md",
+    "().md"
+  ]
+}
