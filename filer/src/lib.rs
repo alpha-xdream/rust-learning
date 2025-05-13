@@ -7,13 +7,11 @@ use console::style; // 导入console库，用于颜色输出
 /// 参数:
 ///   - dir_path: 当前遍历的目录路径
 ///   - name_count: 文件名到路径列表的映射
-///   - duplicates: 存储重复文件路径的列表
 /// 返回值:
 ///   - io::Result<()>: 操作结果
 fn walk_dir(
     dir_path: &str,
     name_count: &mut HashMap<String, Vec<String>>,
-    duplicates: &mut HashMap<String, Vec<String>>,
 ) -> io::Result<()> {
     if let Ok(entries) = fs::read_dir(dir_path) {
         // 遍历目录中的每一项
@@ -30,17 +28,11 @@ fn walk_dir(
                     .entry(file_name.to_string())
                     .or_insert(Vec::new());
                 paths.push(path.to_string());
-                if paths.len() > 1 {
-                    let duplicate = duplicates
-                        .entry(file_name.to_string())
-                        .or_insert(Vec::new());
-                    duplicate.push(path.to_string());
-                }
             }
 
             // 如果是目录，则递归遍历
             if path_buf.is_dir() {
-                walk_dir(path, name_count, duplicates)?;
+                walk_dir(path, name_count)?;
             }
         }
     }
@@ -58,27 +50,36 @@ pub fn run(path: &str) -> io::Result<()> {
     // key: 文件名, value: 包含该文件名的所有路径
     let mut name_count: HashMap<String, Vec<String>> = HashMap::new();
 
-    // 存储所有重复文件的路径
-    let mut duplicates: HashMap<String, Vec<String>> = HashMap::new();
+    walk_dir(path, &mut name_count)?;
 
-    walk_dir(path, &mut name_count, &mut duplicates)?;
-
-    // 如果有重复文件，则打印所有重复路径
-    if !duplicates.is_empty() {
-        use console::style;
-        println!("{}", style("重名的文件和文件夹:").cyan().bold());
-        for d in duplicates {
-            let duplicate_name = &d.0;
-            println!("{}", style(duplicate_name).red());
-            for path in d.1 {
-                let parent = std::path::Path::new(&path).parent().and_then(|s| s.to_str()).unwrap_or("");
-                let styled_name = style(duplicate_name).red().bold().to_string();
-                let result = format!("{}{}{}", parent, std::path::MAIN_SEPARATOR, styled_name);
-                println!("{}", result);
-            }
+    let mut total_files = 0; // 记录总文件数
+    let mut _total_folders = 0; // 记录总文件夹数
+    let mut has_duplicates = false; // 标记是否有重名的文件和文件夹
+    let mut keys = name_count.keys().collect::<Vec<&String>>();
+    keys.sort();
+    for duplicate_name in keys {
+        let paths = name_count.get(duplicate_name).unwrap();
+        if paths.len() <= 1 {
+            continue;
         }
-    } else {
+        if !has_duplicates {
+            println!("{}", style("重名的文件和文件夹:").red().bold());
+            has_duplicates = true;
+        }
+        total_files += paths.len();
+
+        println!("{} #{}", style(duplicate_name).cyan(), style(paths.len().to_string()).red().bold());
+        for path in paths {
+            let parent = std::path::Path::new(&path).parent().and_then(|s| s.to_str()).unwrap_or("");
+            let styled_name = style(duplicate_name).red().bold().to_string();
+            let result = format!("{}{}{}", parent, std::path::MAIN_SEPARATOR, styled_name);
+            println!("{}", result);
+        }
+    }
+    if !has_duplicates {
         println!("{}", style("没有重名的文件和文件夹。").green().bold());
+    }else{
+        println!("共找到重名的文件和文件夹:{}", style(total_files).red().bold());
     }
 
     Ok(())
