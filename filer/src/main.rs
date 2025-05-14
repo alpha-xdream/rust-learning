@@ -8,9 +8,17 @@ fn main()  -> Result<(), Box<dyn std::error::Error>> {
     let mut input = String::new();
     io::stdin().read_line(&mut input)?;
     let path = input.trim();
-    println!("您输入的目录路径是: {}", path);
 
-    filer::run(path)?;
+    print!("请输入检测的文件类型(如.txt): ");
+    io::stdout().flush()?;
+    let mut input = String::new();
+    io::stdin().read_line(&mut input)?;
+    let filter = input.trim();
+
+    filer::run(filer::Config{
+        path: path.to_string(),
+        filter: filter.to_string(),
+    })?;
 
     Ok(())
 }
