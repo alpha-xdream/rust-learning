@@ -5,7 +5,16 @@ use console::style; // 导入console库，用于颜色输出
 
 pub struct Config {
     pub path: String, // 要搜索的目录路径
-    pub filter: String, // 要过滤的文件类型，如".txt"
+    pub filter: Vec<String>, // 要过滤的文件类型，如".txt"
+}
+
+fn is_filter(path: &str, filter: &Vec<String>) -> bool {
+    for f in filter {
+        if path.ends_with(f) {
+            return true;
+        }
+    }
+    false
 }
 
 /// 递归遍历目录，记录文件名和路径
@@ -16,7 +25,7 @@ pub struct Config {
 ///   - io::Result<()>: 操作结果
 fn walk_dir(
     dir_path: &str,
-    filter: &str,
+    filter: &Vec<String>,
     name_count: &mut HashMap<String, Vec<String>>,
 ) -> io::Result<()> {
     if let Ok(entries) = fs::read_dir(dir_path) {
@@ -32,8 +41,10 @@ fn walk_dir(
                 continue;
             }
 
-            if !is_dir && path.ends_with(filter) {
-                if let Some(file_name) = entry.file_name().to_str() {
+            if !is_dir && is_filter(&path, &filter) {
+                if let Some(file_name_with_ext) = entry.file_name().to_str() {
+                    // 获取无扩展名的文件名
+                    let file_name = std::path::Path::new(file_name_with_ext).file_stem().and_then(|s| s.to_str()).unwrap_or(file_name_with_ext);
                     // 获取或创建该文件名的路径列表
                     // 如果文件名已存在，则添加到对应列表
                     // 如果文件名不存在，则创建新列表
@@ -84,10 +95,20 @@ pub fn run(config: Config) -> io::Result<()> {
         total_files += paths.len();
 
         println!("{} #{}", style(duplicate_name).cyan(), style(paths.len().to_string()).red().bold());
-        for path in paths {
-            let parent = std::path::Path::new(&path).parent().and_then(|s| s.to_str()).unwrap_or("");
+        for path_str in paths {
+            let path = std::path::Path::new(&path_str);
+            let parent = path.parent().and_then(|s| s.to_str()).unwrap_or("");
             let styled_name = style(duplicate_name).red().bold().to_string();
-            let result = format!("{}{}{}", parent, std::path::MAIN_SEPARATOR, styled_name);
+            let ext = if let Some(ext) = path.extension() {
+                if let Some(ext_str) = ext.to_str() {
+                    format!(".{}", ext_str)
+                } else {
+                    "".to_string()
+                }
+            } else {
+                "".to_string()
+            };
+            let result = format!("{}{}{}{}", parent, std::path::MAIN_SEPARATOR, styled_name, ext);
             println!("{}", result);
         }
     }
