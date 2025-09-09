@@ -99,15 +99,7 @@ pub fn run(config: Config) -> io::Result<()> {
             let path = std::path::Path::new(&path_str);
             let parent = path.parent().and_then(|s| s.to_str()).unwrap_or("");
             let styled_name = style(duplicate_name).red().bold().to_string();
-            let ext = if let Some(ext) = path.extension() {
-                if let Some(ext_str) = ext.to_str() {
-                    format!(".{}", ext_str)
-                } else {
-                    "".to_string()
-                }
-            } else {
-                "".to_string()
-            };
+            let ext = path.extension().and_then(|ext| ext.to_str()).map(|ext_str| format!(".{}", ext_str)).unwrap_or_default();
             let result = format!("{}{}{}{}", parent, std::path::MAIN_SEPARATOR, styled_name, ext);
             println!("{}", result);
         }
