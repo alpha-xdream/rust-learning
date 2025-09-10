@@ -1,0 +1,14 @@
+[package]
+name = "flappy"
+version = "0.1.0"
+edition = "2024"
+
+[profile.release]
+strip = "symbols"  # 自动从二进制文件去除符号信息.
+opt-level = "z"  #  二进制文件大小优化
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[dependencies]
+bracket-lib = "~0.8"
